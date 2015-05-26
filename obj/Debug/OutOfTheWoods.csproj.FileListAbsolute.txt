@@ -1,0 +1,12 @@
+C:\Users\Jason\Desktop\College\Sem4\Programming3\OutOfTheWoods\OutOfTheWoods\bin\OutOfTheWoods.dll.config
+C:\Users\Jason\Desktop\College\Sem4\Programming3\OutOfTheWoods\OutOfTheWoods\bin\OutOfTheWoods.dll
+C:\Users\Jason\Desktop\College\Sem4\Programming3\OutOfTheWoods\OutOfTheWoods\bin\OutOfTheWoods.pdb
+C:\Users\Jason\Desktop\College\Sem4\Programming3\OutOfTheWoods\OutOfTheWoods\obj\Debug\OutOfTheWoods.csprojResolveAssemblyReference.cache
+C:\Users\Jason\Desktop\College\Sem4\Programming3\OutOfTheWoods\OutOfTheWoods\obj\Debug\OutOfTheWoods.dll
+C:\Users\Jason\Desktop\College\Sem4\Programming3\OutOfTheWoods\OutOfTheWoods\obj\Debug\OutOfTheWoods.pdb
+C:\Users\Jason\Desktop\GIT\OOTW\OutOfTheWoods\OutOfTheWoods\bin\OutOfTheWoods.dll
+C:\Users\Jason\Desktop\GIT\OOTW\OutOfTheWoods\OutOfTheWoods\bin\OutOfTheWoods.pdb
+C:\Users\Jason\Desktop\GIT\OOTW\OutOfTheWoods\OutOfTheWoods\obj\Debug\OutOfTheWoods.csprojResolveAssemblyReference.cache
+C:\Users\Jason\Desktop\GIT\OOTW\OutOfTheWoods\OutOfTheWoods\obj\Debug\OutOfTheWoods.dll
+C:\Users\Jason\Desktop\GIT\OOTW\OutOfTheWoods\OutOfTheWoods\obj\Debug\OutOfTheWoods.pdb
+C:\Users\Jason\Desktop\GIT\OOTW\OutOfTheWoods\OutOfTheWoods\bin\OutOfTheWoods.dll.config
