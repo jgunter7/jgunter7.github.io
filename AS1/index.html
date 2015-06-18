@@ -1,0 +1,363 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--
+        -------------------------------------------------------------------------------------------------------    
+        Source File: OutOfTheWoods.sln
+        Author's: Jason Gunter - 300742344
+        Last Modified By: Jason Gunter
+        Date Last Modified: May 26th, 2015
+        Program Description: This is a simple game where the user attempts to choose the correct path to safety.
+        Revision History: https://github.com/jgunter7/OutOfTheWoods
+        --------------------------------------------------------------------------------------------------------
+    -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Out Of The Woods</title>
+
+    <!--CSS SECTION-->
+    <link href="css/reset.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+
+</head>
+<body onload="init();">
+    <!--Background Music Here-->
+    <audio id="audioEm" autoplay loop>
+        <source src="assets/audio/bgm.mp3">
+    </audio>
+    <div id="impress">
+        <!--MAIN MENU ----------------------------------------------------->
+        <div id="1" class="step slide">
+            <div class="slide-text">
+                <div id="mainmenu">
+                    <h1>Main Menu</h1>
+                    <hr />
+                    Welcome to <span class="spook">Out of the Woods</span><br />
+                    Press "Begin" to start the game<br />
+                    <img src="assets/img/ml.png" width="275" height="330" />
+                    <hr />
+                    <div id="floaterL">
+                        <a id="mustog" href="JavaScript:ToggleMusic();">Turn Music Off</a>
+                    </div>
+                    <div id="floaterR">
+                        <a href="#2">Begin Game</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--FIRST LEVEL ------------------------------------------------------------------------------------------------>
+        <!--INITIAL Screen ----------------------------------------------------->
+        <div id="2" class="step slide" data-y="1500">
+            <div class="slide-text">
+                <p>
+                    You open your eyes to a dark cloudy sky.
+                    After blinking to clear your eyes.. and ensure you are awake and not dreaming..
+                    you find you are in the middle of a dense forest.
+                </p>
+                <hr />
+                <div class="actnr">
+                    <div class="lefta">
+                        You hear a nearby stream to your left...<br />
+                        <img src="assets/img/stream.jpeg" height="275" width="300" />
+                        <a href="#stream">To The Stream!</a>
+                    </div>
+                    <div class="righta">
+                        There seems to be a cliff to your right...<br />
+                        <img src="assets/img/cliff.jpg" height="275" width="300" />
+                        <a href="#cliff">To The Cliff!</a>
+                    </div>
+                </div>
+                <hr />
+                <center><a href="#1">Back to Main Menu</a></center>
+            </div>
+        </div>
+        <!-- SECOND LEVEL -------------------------------------------------------------------------------------------------->
+        <!--STREAM Screen ----------------------------------------------------->
+        <div id="stream" class="step slide" data-x="-3750" data-y="3000">
+            <div class="slide-text">
+                <p>
+                    You have found the stream! There is a small wooden boat with a paddle overturned
+                    on shore. You also see a broken road sign in the woods, there may be a road nearby!
+                </p>
+                <hr />
+                <div class="actnr">
+                    <div class="lefta">
+                        Boat Down-stream...<br />
+                        <img src="assets/img/river.jpeg" height="275" width="300" />
+                        <a href="#boat">Boat!</a>
+                    </div>
+                    <div class="righta">
+                        Go towards road sign...<br />
+                        <img src="assets/img/sign.jpg" height="275" width="300" />
+                        <a href="#sign">Road Sign!</a>
+                    </div>
+                </div>
+                <hr />
+                <center><a href="#1">Back to Main Menu</a></center>
+            </div>
+        </div>
+        <
+        <!--CLIFF Screen ----------------------------------------------------->
+        <div id="cliff" class="step slide" data-x="3750" data-y="3000">
+            <div class="slide-text">
+                <p>
+                    You arrive at the edge of the cliff. Surprisingly, it appears that someone has been here
+                    before you as there is already a rope to aid in rappelling down. You have also found a
+                    random teleporter glowing under some bushes.
+                </p>
+                <hr />
+                <div class="actnr">
+                    <div class="lefta">
+                        Rappel Down the Cliff..<br />
+                        <img src="assets/img/cliff_start.JPG" height="275" width="300" />
+                        <a href="#rapell">Rappel Down!</a>
+                    </div>
+                    <div class="righta">
+                        Use the Teleporter..<br />
+                        <img src="assets/img/teleporter.gif" height="275" width="300" />
+                        <a href="#tele">Teleporter Pad!</a>
+                    </div>
+                </div>
+                <hr />
+                <center><a href="#1">Back to Main Menu</a></center>
+            </div>
+        </div>
+        <!-- THIRD LEVEL ------------------------------------------------------------------------------------------------>
+        <!--BOAT-DOWN Screen ----------------------------------------------------->
+        <div id="boat" class="step slide" data-x="-5250" data-y="4500">
+            <div class="slide-text">
+                <p>
+                    The stream brings you to a fork, you need to choose the left stream..or the right.
+                    The current is too strong to go back now.
+                </p>
+                <hr />
+                <div class="actnr">
+                    <div class="lefta">
+                        Left...<br />
+                        <img src="assets/img/river_fork.jpeg" height="275" width="300" />
+                        <a href="#sleft">LEFT!</a>
+                    </div>
+                    <div class="righta">
+                        Right...<br />
+                        <img src="assets/img/river_fork.jpeg" height="275" width="300" />
+                        <a href="#sright">RIGHT!</a>
+                    </div>
+                </div>
+                <hr />
+                <center><a href="#1">Back to Main Menu</a></center>
+            </div>
+        </div>
+        <!--SIGN Screen ---------------------------------------------------------->
+        <div id="sign" class="step slide" data-x="-2250" data-y="4500">
+            <div class="slide-text">
+                <p>
+                    Once you arrive at the sign, you can see a small dirt road in the distance.
+                    You can also hear a loud humming noise in the thick brush off to your left.
+                </p>
+                <hr />
+                <div class="actnr">
+                    <div class="lefta">
+                        Humming Noise...<br />
+                        <img src="assets/img/mid_woods.jpg" height="275" width="300" />
+                        <a href="#humm">Hummmmm!</a>
+                    </div>
+                    <div class="righta">
+                        The Road...<br />
+                        <img src="assets/img/road.jpg" height="275" width="300" />
+                        <a href="#road">The Road!</a>
+                    </div>
+                </div>
+                <hr />
+                <center><a href="#1">Back to Main Menu</a></center>
+            </div>
+        </div>
+        <!--ROPE-DOWN Screen ----------------------------------------------------->
+        <div id="rapell" class="step slide" data-x="2250" data-y="4500">
+            <div class="slide-text">
+                <p>
+                    The rope ends at a small ridge a little ways down the cliff.
+                    The cliff continues, but not as steep. Alternatively,
+                    you see some fruit bearing shrubs near the corner of the ridge.
+                </p>
+                <hr />
+                <div class="actnr">
+                    <div class="lefta">
+                        Attempt to slide down the cliff..<br />
+                        <img src="assets/img/fcliff.jpg" height="275" width="300" />
+                        <a href="#slided">Slide Down!</a>
+                    </div>
+                    <div class="righta">
+                        Grab some berries on the ridge..<br />
+                        <img src="assets/img/rcliff.jpg" height="275" width="300" />
+                        <a href="#berry">Berries Man!</a>
+                    </div>
+                </div>
+                <hr />
+                <center><a href="#1">Back to Main Menu</a></center>
+            </div>
+        </div>
+        <!--TELEPORTER Screen ----------------------------------------------------->
+        <div id="tele" class="step slide" data-x="5250" data-y="4500">
+            <div class="slide-text">
+                <p>
+                    You teleport through a swirl of colours, and are thrown to the ground.
+                    As you get up you realise you are at the edge of a small town, in a farmers field.
+                </p>
+                <hr />
+                <div class="actnr">
+                    <div class="lefta">
+                        Steal Farmers Food...<br />
+                        <img src="assets/img/town_edge.jpg" height="275" width="300" />
+                        <a href="#dine">Dine & Dash!</a>
+                    </div>
+                    <div class="righta">
+                        Enter the town...<br />
+                        <img src="assets/img/enter_town.jpg" height="275" width="300" />
+                        <a href="#enter">Enter!</a>
+                    </div>
+                </div>
+                <hr />
+                <center><a href="#1">Back to Main Menu</a></center>
+            </div>
+        </div>
+        <!--FINAL ENDINGS x 8 POSSIBILITIES----------------------------------------------------------------------->
+        <!--STREAM LEFT PATH Screen ---------------------------------------------------------->
+        <div id="sleft" class="step slide" data-x="-6000" data-y="6000">
+            <div class="slide-text">
+                <p>
+                    The stream picks up speed rapidly and no matter how hard you paddle you can't get to shore!
+                    You know that a waterfall is up ahead, but you can't escape the current pulling you towards it.
+                    Before you know it, you fall over the edge and plummet to your death.
+                </p>
+                <div class="tmid">
+                    <br />
+                    <img src="assets/img/waterfall.jpg" height="275" width="300" /><br /><br />
+                    <a href="#1">Quit to Main Menu</a>
+                </div>
+            </div>
+        </div>
+        <!--STREAM RIGHT PATH Screen ---------------------------------------------------------->
+        <div id="sright" class="step slide" data-x="-4500" data-y="6000">
+            <div class="slide-text">
+                <p>
+                    The water is very warm as you approach a bay. The water is very still and you can hear a loud humming
+                    noise from around the corner of the bay. As you get closer you really don't feel good, and you are
+                    noticing some very wierd rashes on your arms! As you round the bend you see an old, run down nuclear plant.
+                    It seems that you now have radiation poisoning, and that was your last thought...
+                </p>
+                <div class="tmid">
+                    <img src="assets/img/nuke.jpg" height="275" width="300" /><br />
+                    <a href="#1">Quit to Main Menu</a>
+                </div>
+            </div>
+        </div>
+        <!--HUMMING NOISE Screen ---------------------------------------------------------->
+        <div id="humm" class="step slide" data-x="-3000" data-y="6000">
+            <div class="slide-text">
+                <p>
+                    As you get closer, the noise gets louder and you start to feel very sick. You think it is just your
+                    excitment for adventure getting the best of you! There is a small quiet bay of water, to quiet... As
+                    you hack your way through the remainder of the thicker part of the forest, you stumble into a clearing...
+                    You figure out why you don't feel so good, your within 100 feet of a run-down nuclear plant...
+                </p>
+                <div class="tmid">
+                    <img src="assets/img/nuke.jpg" height="275" width="300" /><br />
+                    <a href="#1">Quit to Main Menu</a>
+                </div>
+            </div>
+        </div>
+        <!--ROAD Screen ---------------------------------------------------------->
+        <div id="road" class="step slide" data-x="-1500" data-y="6000">
+            <div class="slide-text">
+                <p>
+                    You make it to the road, as you walk down you notice that their are all kinds of stains and bones
+                    scattered along the ditches. You pass a sign with nothing written on it and you hear a growl from
+                    behind you! You turn around, but nothing is there, except the sign has words on the
+                    other side... beware of bears! Not just any bears you soon notice! The bears have mutated
+                    from exposure to radiation, and a huge one is running towards you! You turn to run..and.. well.. you die.
+                </p>
+                <div class="tmid">
+                    <img src="assets/img/road.jpg" height="275" width="300" /><br />
+                    <a href="#1">Quit to Main Menu</a>
+                </div>
+            </div>
+        </div>
+        <!--SLIDE-DOWN Screen ----------------------------------------------------->
+        <div id="slided" class="step slide" data-x="1500" data-y="6000">
+            <div class="slide-text">
+                <p>
+                    You slide down the cliff, but you quickly lose your footing and gain speed. You
+                    end up rolling and falling down the cliff, hitting trees and rocks, until you finally lose consciousness.<br />
+                    -----------------------------------<br />
+                    You wake up in a bright white room, in what looks to be a hospital bed. A large
+                    glass door slides open, revealing a couple of army men in uniform. They explain that you are in a hidden
+                    military base and you are safe from the outside world, but you have severe brain damage which wiped most of
+                    your memory!
+                </p>
+                <center>
+                    <img src="assets/img/militaryb.jpg" height="200" width="250" /><br />
+                    <a href="JavaScript:SeeMore();">1 Month later...</a>
+                    <a href="#1">Quit to Main Menu</a>
+                </center>
+            </div>
+        </div>
+        <!--BERRY Screen ----------------------------------------------------->
+        <div id="berry" class="step slide" data-x="3000" data-y="6000">
+            <div class="slide-text">
+                <p>
+                    You go across the ridge to eat the berries. Your almost to the bush when the ridge below you gives way, causing
+                    you to plummet down the highest part of the cliff. You black out when you hit the ground.. well... because your dead.
+                </p>
+                <div class="tmid">
+                    <br />
+                    <img src="assets/img/rcliff.jpg" height="275" width="300" /><br /><br />
+                    <a href="#1">Quit to Main Menu</a>
+                </div>
+            </div>
+        </div>
+        <!--Dine+Dash Screen ----------------------------------------------------->
+        <div id="dine" class="step slide" data-x="4500" data-y="6000">
+            <div class="slide-text">
+                <p>
+                    You grab as many plants as you can and begin running away. You hear yelling and screaming
+                    behind you and realize you have been spotted! Next you hear gun shots, but you trip over a
+                    trap that rips into your upper leg. You crash to the ground, wondering what has happened
+                    that farmers need such big traps! You lose consiousness and bleed out before the crazy farmers reach your body.
+                </p>
+                <div class="tmid">
+                    <br />
+                    <img src="assets/img/town_edge.jpg" height="275" width="300" /><br />
+                    <a href="#1">Quit to Main Menu</a>
+                </div>
+            </div>
+        </div>
+        <!--ENTER TOWN Screen ----------------------------------------------------->
+        <div id="enter" class="step slide" data-x="6000" data-y="6000">
+            <div class="slide-text">
+                <p>
+                    As soon as you enter the main gate, people start screaming and
+                    running away from you. The sheriff draws his weapon and he asks where you came from, and of course you reply,
+                    "From the woods", the sheriff shakes his head. "No one survives in the woods, and if they do, they dont live very long."
+                    he says, before shooting you. As you fall you see your reflection in a puddle, you body has mutated from the teleporter, and your skin was a sick shade of green.
+                </p>
+                <div class="tmid">
+                    <img src="assets/img/sheriff.jpg" height="275" width="300" /><br />
+                    <a href="#1">Quit to Main Menu</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Whole Screen Overlay Effect-->
+    <div id="loader" class="popup">
+        Once you are moved from the medical bay, you are locked inside of a cell.
+        You never see anyone out of an army uniform, and they refer to you as 'Subject'.
+        Then one morning you wake up in the middle of the woods, and your head feels really funny....<br /><br />
+        <a href="JavaScript:SeeNoMore();">Close</a>
+    </div>
+
+    <!--JAVASCRIPT SECTION-->
+    <script src="Scripts/lib/impress.js"></script>
+    <script src="Scripts/guts.js"></script>
+    <script src="Scripts/game.js"></script>
+</body>
+</html>

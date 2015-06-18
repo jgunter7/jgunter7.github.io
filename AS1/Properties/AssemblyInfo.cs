@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SlotMachineAs2")]
+[assembly: AssemblyTitle("OutOfTheWoods")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("SlotMachineAs2")]
+[assembly: AssemblyProduct("OutOfTheWoods")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("9b4c0ebf-55e5-4655-91dc-b9983153e6b1")]
+[assembly: Guid("3c3fa5b7-013f-4cce-99ba-34649265c32f")]
 
 // Version information for an assembly consists of the following four values:
 //

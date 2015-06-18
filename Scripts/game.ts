@@ -1,14 +1,15 @@
-/// <reference path="typings/stats/stats.d.ts" />
+﻿/// <reference path="typings/stats/stats.d.ts" />
 /// <reference path="typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="typings/soundjs/soundjs.d.ts" />
 /// <reference path="typings/preloadjs/preloadjs.d.ts" />
 /// <reference path="typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="typings/easeljs/easeljs.d.ts" />
+
 // Framework variables
-var stat;
+var stat: Stats;
 var canvas = document.getElementById("mc");
-var stage;
-var assets;
+var stage: createjs.Stage;
+var assets: createjs.LoadQueue;
 var manifest = [
     { id: "7s", src: "img/7s.png" },
     { id: "bar", src: "img/bar.png" },
@@ -27,28 +28,30 @@ var manifest = [
     { id: "betline", src: "img/betline.png" },
     { id: "slotwav", src: "sound/slots.wav" }
 ];
-var imgs = ["7s", "bar", "bell", "cherry", "lemon", "orange", "plum"];
+var imgs = [ "7s", "bar", "bell", "cherry", "lemon", "orange", "plum" ];
+
 // Global Game Variables
-var lblCash;
-var lblBet;
-var lblPayout;
-var imgSlotMachine;
-var btnSpin;
-var slot1;
-var slot2;
-var slot3;
+var lblCash: createjs.Text;
+var lblBet: createjs.Text;
+var lblPayout: createjs.Text;
+var imgSlotMachine: createjs.Bitmap;
+var btnSpin: createjs.Bitmap;
+var slot1: createjs.Bitmap;
+var slot2: createjs.Bitmap;
+var slot3: createjs.Bitmap;
 var spinAnim = 0;
 var spinAnimm = false;
 var cash = 500;
 var bet = 5;
 var payout = 0;
 var slotsVal = ["7s", "7s", "7s"];
-var btnPlus;
-var btnMinus;
-var btnStart;
-var btnReset;
-var btnQuit;
-var betLine;
+var btnPlus: createjs.Bitmap;
+var btnMinus: createjs.Bitmap;
+var btnStart: createjs.Bitmap;
+var btnReset: createjs.Bitmap;
+var btnQuit: createjs.Bitmap;
+var betLine: createjs.Bitmap;
+
 function init() {
     //Initialize stage and FPS and game loop and Stats monitor
     stage = new createjs.Stage(canvas);
@@ -59,6 +62,7 @@ function init() {
     // Show main menu
     menu();
 }
+
 function setupStats() {
     // Display stats monitor
     stat = new Stats();
@@ -68,6 +72,7 @@ function setupStats() {
     stat.domElement.style.top = '70px';
     document.body.appendChild(stat.domElement);
 }
+
 function preload() {
     // Preload images and sound clips
     assets = new createjs.LoadQueue();
@@ -75,6 +80,7 @@ function preload() {
     assets.on("complete", init, this);
     assets.loadManifest(manifest);
 }
+
 function gameloop() {
     // Update stage / Do animations
     stat.begin();
@@ -84,39 +90,44 @@ function gameloop() {
     stage.update();
     stat.end();
 }
+
 function menu() {
     // This function displays the main menu
     stage.removeAllChildren(); // Clear the screen for the menu
     //Menu Text
-    var menuText;
+    var menuText: createjs.Text;
     menuText = new createjs.Text("Welcome To Super7Slots", "38px Consolas", "#000000");
     menuText.x = 5;
     menuText.y = 100;
     stage.addChild(menuText);
     // Menu 'Start' button
     btnStart = new createjs.Bitmap(assets.getResult("start"));
-    btnStart.x = canvas.clientWidth / 2 - btnStart.getBounds().width / 2;
+    btnStart.x = canvas.clientWidth / 2 - btnStart.getBounds().width /2;
     btnStart.y = 250;
     btnStart.on("click", btnStart_Click);
     btnStart.on("mouseover", btnStart_Mover);
     btnStart.on("mouseout", btnStart_Mout);
     stage.addChild(btnStart);
 }
+
 function btnStart_Click() {
     // Show slot machine screen
     main();
 }
+
 function btnStart_Mout() {
     // change alpha of btnStart
     btnStart.alpha = 1.0;
 }
+
 function btnStart_Mover() {
     // change alpha of btnStart
     btnStart.alpha = 0.7;
 }
-function main() {
+
+function main() { 
     // Display main slot machine game
-    stage.removeAllChildren();
+    stage.removeAllChildren(); 
     // Draw slot machine first
     imgSlotMachine = new createjs.Bitmap(assets.getResult("slots"));
     stage.addChild(imgSlotMachine);
@@ -144,7 +155,7 @@ function main() {
     //
     spinAnim++;
     // Draw Slot P1
-    if (spinAnim < 10) {
+    if (spinAnim < 10) { // This slot should stop spinning first
         slotsVal[0] = imgs[Math.floor(Math.random() * 6)];
     }
     slot1 = new createjs.Bitmap(assets.getResult(slotsVal[0]));
@@ -153,7 +164,7 @@ function main() {
     slot1.scaleX = slot1.scaleY = Math.min(125 / 150, 125 / 115);
     stage.addChild(slot1);
     // Draw Slot P2
-    if (spinAnim < 25) {
+    if (spinAnim < 25) { // This slot will stop spinning second
         slotsVal[1] = imgs[Math.floor(Math.random() * 6)];
     }
     slot2 = new createjs.Bitmap(assets.getResult(slotsVal[1]));
@@ -182,6 +193,7 @@ function main() {
         CheckWin();
     }
 }
+
 function addBtnSpin() {
     // Draw spin button
     btnSpin = new createjs.Bitmap(assets.getResult("spin"));
@@ -192,6 +204,7 @@ function addBtnSpin() {
     btnSpin.on("mouseout", btnSpin_Mout);
     stage.addChild(btnSpin);
 }
+
 function addNavButtons() {
     // Add Reset && Quit button
     btnReset = new createjs.Bitmap(assets.getResult("reset"));
@@ -209,6 +222,7 @@ function addNavButtons() {
     btnQuit.on("mouseout", btnQuit_Mout);
     stage.addChild(btnQuit);
 }
+
 function addTextitems() {
     stage.removeChild(lblCash);
     stage.removeChild(lblBet);
@@ -229,6 +243,7 @@ function addTextitems() {
     lblPayout.y = imgSlotMachine.getBounds().height - 88;
     stage.addChild(lblPayout);
 }
+
 function CheckWin() {
     // Check if anything needs to be payed out
     if (cash >= bet)
@@ -241,6 +256,7 @@ function CheckWin() {
             cash = cash + payout;
             payout = 0;
         }
+        //Other sets of three are 25% payout
         else {
             winnings = Math.floor(payout * 0.25);
             cash = cash + Math.floor(payout * 0.25);
@@ -251,6 +267,7 @@ function CheckWin() {
     // Refresh text labels (cash, bet, payout)
     addTextitems();
 }
+
 function btnSpin_Click() {
     // Do animation
     spinAnim = 0;
@@ -275,20 +292,23 @@ function btnSpin_Click() {
             break;
     }
     if (payout > 10000)
-        payout = 10000; // Max Jackpot size - all extra funds go to the house ;)
+        payout = 10000;// Max Jackpot size - all extra funds go to the house ;)
     addTextitems();
     //  Enable animation timer and begin animation
     spinAnimm = true;
     main();
 }
+
 function btnSpin_Mover() {
     // Change Alpha for button
     btnSpin.alpha = 0.8;
 }
+
 function btnSpin_Mout() {
     // Change Alpha for button
     btnSpin.alpha = 1.0;
 }
+
 function btnMinus_Click() {
     // Lower the bet for the next spin
     if (bet > 5)
@@ -298,6 +318,7 @@ function btnMinus_Click() {
     if (cash >= bet)
         addBtnSpin();
 }
+
 function btnPlus_Click() {
     // Increase the bet for the next spin
     if (bet < 25)
@@ -307,6 +328,7 @@ function btnPlus_Click() {
     if (cash >= bet)
         addBtnSpin();
 }
+
 function btnReset_Click() {
     // Reset the game variables and re-draw the slot machine screen
     cash = 500;
@@ -314,14 +336,17 @@ function btnReset_Click() {
     payout = 0;
     main();
 }
+
 function btnReset_Mover() {
     // Change Alpha for button
     btnReset.alpha = 0.7;
 }
+
 function btnReset_Mout() {
     // Change Alpha for button
     btnReset.alpha = 1.0;
 }
+
 function btnQuit_Click() {
     // Reset game variables and draw the Main menu
     cash = 500;
@@ -329,12 +354,13 @@ function btnQuit_Click() {
     payout = 0;
     menu();
 }
+
 function btnQuit_Mover() {
     // Change Alpha for button
     btnQuit.alpha = 0.7;
 }
+
 function btnQuit_Mout() {
     // Change Alpha for button
     btnQuit.alpha = 1.0;
 }
-//# sourceMappingURL=game.js.map
