@@ -1,34 +1,66 @@
 var managers;
 (function (managers) {
-    // Loads all images,sprites, and audio
     var Asset = (function () {
         // CONSTRUCTOR
         function Asset() {
             // PRIVATE PROPERTIES
             this.manifest = [
-                { id: "city", src: "assets/images/city.png" },
-                { id: "road", src: "assets/images/road.png" },
-                { id: "start", src: "assets/images/start.png" },
-                { id: "instru", src: "assets/images/instru.png" },
-                { id: "back", src: "assets/images/back.png" },
-                { id: "quit", src: "assets/images/quit.png" },
-                { id: "engine", src: "assets/audio/car.wav" },
-                { id: "ching", src: "assets/audio/ching.wav" },
-                { id: "crash", src: "assets/audio/crash.wav" }
+                { id: "loop", src: "assets/audio/bass_loop.wav" },
+                { id: "die", src: "assets/audio/die.wav" },
+                { id: "reload", src: "assets/audio/reload.mp3" },
+                { id: "shot", src: "assets/audio/shot.wav" },
+                { id: "wall_fall", src: "assets/audio/wall_fall.mp3" },
+                { id: "hit", src: "assets/audio/uh.wav" },
+                { id: "logo", src: "assets/images/logo.png" },
+                { id: "bgin", src: "assets/images/bgin.png" }
             ];
             this.data = {
                 "images": [
                     "assets/images/atlas.png"
                 ],
                 "frames": [
-                    [2, 2, 542, 271, 0, -1, -34],
-                    [2, 275, 164, 198, 0, -6, -4],
-                    [168, 275, 298, 148, 0, -11, -46]
+                    [1682, 721, 138, 61],
+                    [1682, 904, 118, 61],
+                    [1682, 842, 124, 61],
+                    [1281, 1264, 172, 61],
+                    [1281, 1205, 252, 58],
+                    [1534, 1205, 146, 58],
+                    [1454, 1264, 152, 58],
+                    [1281, 1326, 100, 100],
+                    [1281, 1427, 38, 9],
+                    [0, 721, 1280, 720],
+                    [1682, 966, 75, 75],
+                    [1281, 1102, 350, 102],
+                    [1281, 0, 400, 380],
+                    [1682, 0, 175, 720],
+                    [1281, 381, 175, 720],
+                    [1457, 381, 175, 720],
+                    [1533, 1326, 148, 58],
+                    [1682, 783, 142, 58],
+                    [1382, 1326, 150, 61],
+                    [0, 0, 1280, 720]
                 ],
                 "animations": {
-                    "car": [0],
-                    "money": [1],
-                    "truck": [2]
+                    "pause": [0],
+                    "play": [1],
+                    "quit2": [2],
+                    "upgrade": [3],
+                    "instructions": [4],
+                    "back": [5],
+                    "next": [6],
+                    "stick": [7],
+                    "bullet": [8],
+                    "bg": [9],
+                    "apple": [10],
+                    "gun": [11],
+                    "mApple": [12],
+                    "brick_wall": [13],
+                    "wood_wall": [14],
+                    "steel_wall": [15],
+                    "start": [16],
+                    "quit": [17],
+                    "reload": [18],
+                    "grass": [19]
                 }
             };
             this.preload();

@@ -12,13 +12,19 @@ var objects;
         // CONSTRUCTOR ++++++++++++++++++++++++++++++++++
         function Plane(imageString) {
             _super.call(this, imageString);
-            this.sound = "engine";
-            this.y = 430;
-            createjs.Sound.play(this.sound, { "loop": -1 });
+            //this.sound = "engine";
+            this.y = 250;
+            this.x = 500;
+            //this.engineSound = createjs.Sound.play(this.sound, { "loop": -1 });
         }
         // PUBLIC METHODS +++++++++++++++++++++++++++++++
         Plane.prototype.update = function () {
-            this.x = stage.mouseX; // position plane under mouse
+            //this.x = stage.mouseX; // position plane under mouse
+            var mx = stage.mouseX;
+            var my = stage.mouseY;
+            var angle = Math.atan2(my - this.y, mx - this.x);
+            angle = angle * (180 / Math.PI);
+            this.rotation = angle;
         };
         return Plane;
     })(objects.GameObject);

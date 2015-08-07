@@ -5,23 +5,15 @@ var managers;
         function Collision() {
         }
         //PUBLIC METHODS ++++++++++++++++++++++++
-        // check the distance between truck and any other game object
-        Collision.prototype.check = function (gameObject, x) {
-            var rect1;
-            var rect2;
-            rect1 = truck.getTransformedBounds();
-            rect2 = gameObject.getTransformedBounds();
-            //This game users ractangles as the hit areas, this works better than the distance 
-            // formula for my situation.
-            if (rect1.intersects(rect2)) {
+        // check the distance between plane and any other game object
+        Collision.prototype.check = function (gameObject) {
+            if (true) {
                 if (gameObject.isColliding == false) {
                     createjs.Sound.play(gameObject.sound);
-                    if (gameObject.name == "car") {
-                        enemys[x].reset();
+                    if (gameObject.name == "cloud") {
                         scoreboard.lives--;
                     }
-                    if (gameObject.name == "money") {
-                        coin.reset();
+                    if (gameObject.name == "island") {
                         scoreboard.score += 100;
                     }
                 }

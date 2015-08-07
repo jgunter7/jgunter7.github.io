@@ -4,20 +4,25 @@
 /// <reference path="typings/soundjs/soundjs.d.ts" />
 /// <reference path="typings/preloadjs/preloadjs.d.ts" />
 
+/// <reference path="config/config.ts" />
 /// <reference path="managers/asset.ts" />
 
 /// <reference path="objects/gameobject.ts" />
-/// <reference path="objects/city.ts" />
-/// <reference path="objects/road.ts" />
-/// <reference path="objects/truck.ts" />
-/// <reference path="objects/coin.ts" />
-/// <reference path="objects/lambo.ts" />
+/// <reference path="objects/bullet.ts" />
 
-/// <reference path="objects/scoreboard.ts" />
+/// <reference path="objects/button.ts" />
+/// <reference path="objects/label.ts" />
 
-/// <reference path="managers/collision.ts" />
+/// <reference path="managers/bullet.ts" />
 
+/// <reference path="states/instruction.ts" />
+/// <reference path="states/gameover.ts" />
 /// <reference path="states/play.ts" />
+/// <reference path="states/menu.ts" />
+
+
+// on branch atlas
+
 
 // Game Framework Variables
 var canvas = document.getElementById("canvas");
@@ -25,26 +30,46 @@ var stage: createjs.Stage;
 var stats: Stats;
 var game: createjs.Container;
 
-// Game Variables
-var city: objects.City;
-var road: objects.Road;
-var truck: objects.Truck;
-var coin: objects.Coin;
-var enemys: objects.Lambo[] = [];
-var gameState = "menu";
 
-var scoreboard: objects.ScoreBoard;
+// Game Variables
+var gunner: objects.Gun;
+var grass: objects.Image;
+var grass2: objects.Image;
+var bgToolBar: objects.Image;
+var wall: objects.Wall;
+var apples: objects.Apple[] = [];
+var btnStart: objects.Button;
+var btnInstructions: objects.Button;
+var btnBack: objects.Button;
+var btnNext: objects.Button;
+var btnQuitGO: objects.Button;
+var btnQuit: objects.Button;
+var btnPause: objects.Button;
+var btnPlay: objects.Button;
+var btnUpgradeWall: objects.Button;
+var btnUpgradeClip: objects.Button;
+var btnUpgradeRTime: objects.Button;
+var btnReload: objects.Button;
+
+var hud: objects.HUD;
+var score: number = 0;
+var money: number = 0;
+var pause: boolean = false;
+var autoGun: boolean = false;
+var agCount: number = 0;
 
 
 // Game Managers
 var assets: managers.Asset;
-var collision: managers.Collision;
+var bulletManager: managers.BulletManager;
 
 // Game States
+var currentStateFunction; // state alias
+var currentState: number;
+var gameOver: states.GameOver;
+var instructions: states.Instruction;
 var play: states.Play;
 var menu: states.Menu;
-var instructions: states.Instructions;
-var gameover: states.GameOver;
 
 
 // Preloader Function
@@ -64,8 +89,11 @@ function init() {
     // event listener triggers 60 times every second
     createjs.Ticker.on("tick", gameLoop); 
 
+    // set the current state
+    currentState = config.MENU_STATE;
+
     // calling main game function
-    main();
+    changeState();
 }
 
 // function to setup stat counting
@@ -75,7 +103,7 @@ function setupStats() {
 
     // align bottom-right
     stats.domElement.style.position = 'absolute';
-    stats.domElement.style.left = '650px';
+    stats.domElement.style.left = '10px';
     stats.domElement.style.top = '10px';
 
     document.body.appendChild(stats.domElement);
@@ -86,20 +114,7 @@ function setupStats() {
 function gameLoop() {
     stats.begin(); // Begin measuring
 
-    switch (gameState) {
-        case "menu":
-            menu.update();
-            break;
-        case "instructions":
-            instructions.update();
-            break;
-        case "play":
-            play.update();
-            break;
-        case "gameover":
-            gameover.update();
-            break;
-    }
+    currentStateFunction.update();
 
     stage.update();
 
@@ -108,41 +123,34 @@ function gameLoop() {
 
 
 // Our Main Game Function
-function main() {
+function changeState() {
     // instantiate new game container
     game = new createjs.Container();
 
-    // instantiate play state;
-    //play = new states.Play();
-    //instructions = new states.Instructions();
-    menu = new states.Menu();
-    //gameover = new states.GameOver();
+    // State Machine
+    switch (currentState) {
+        case config.MENU_STATE:
+            // instantiate menu state;
+            menu = new states.Menu();
+            currentStateFunction = menu;
+            break;
+        case config.INSTRUCTION_STATE:
+            // instantiate instruction state;
+            instructions = new states.Instruction();
+            currentStateFunction = instructions;
+            break;
+        case config.PLAY_STATE:
+            // instantiate play state;
+            play = new states.Play();
+            currentStateFunction = play;
+            break;
+        case config.GAME_OVER_STATE:
+            // instantiate game over state;
+            gameOver = new states.GameOver();
+            currentStateFunction = gameOver;
+            break;
+    }
 
     //add game container to stage
     stage.addChild(game);
-}
-
-// handles cleanup between states
-function NewGameState() {
-    stage.removeAllChildren();
-    if (play != undefined)
-        truck.shutupTruck(); // stop engine noise
-    menu = null;
-    instructions = null;
-    play = null;
-    gameover = null;
-    switch (gameState) {
-        case "menu":
-            menu = new states.Menu();
-            break;
-        case "instructions":
-            instructions = new states.Instructions();
-            break;
-        case "play":
-            play = new states.Play();
-            break;
-        case "gameover":
-            gameover = new states.GameOver();
-            break;
-    }
 }

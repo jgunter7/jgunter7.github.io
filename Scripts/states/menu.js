@@ -1,6 +1,5 @@
 var states;
 (function (states) {
-    // Main menu gamestate
     var Menu = (function () {
         //CONSTRUCTOR
         function Menu() {
@@ -9,47 +8,52 @@ var states;
         // PUBLIC METHODS
         // update method
         Menu.prototype.update = function () {
-            // allow city and road to animate
-            city.update();
-            road.update();
         };
         // main method
         Menu.prototype.main = function () {
             // instantiate new game container
             game = new createjs.Container();
-            // add city and road paralax
-            city = new objects.City(assets.loader.getResult("city"));
-            game.addChild(city);
-            road = new objects.Road(assets.loader.getResult("road"));
-            game.addChild(road);
-            // Add start and instruction buttons
-            start = new createjs.Bitmap(assets.loader.getResult("start"));
-            start.x = 25;
-            start.y = 355;
-            start.on("click", btnStart_Click);
-            game.addChild(start);
-            instr = new createjs.Bitmap(assets.loader.getResult("instru"));
-            instr.x = 275;
-            instr.y = 355;
-            instr.on("click", btnInstru_Click);
-            game.addChild(instr);
+            //game title image
+            var title = new createjs.Bitmap(assets.loader.getResult("logo"));
+            title.x = canvas.clientWidth / 2 - (title.getBounds().width / 2);
+            title.y = 50;
+            game.addChild(title);
+            // main scary apple image
+            var mainImage = new objects.Image("mApple");
+            mainImage.x = (canvas.clientWidth / 2);
+            mainImage.y = 350;
+            game.addChild(mainImage);
+            // start button
+            btnStart = new objects.Button("start");
+            btnStart.x = 500;
+            btnStart.y = 600;
+            btnStart.on("click", this.btnStart_Click);
+            game.addChild(btnStart);
+            // instruction button
+            btnInstructions = new objects.Button("instructions");
+            btnInstructions.x = 780;
+            btnInstructions.y = 600;
+            btnInstructions.on("click", this.btnInstructions_Click);
+            game.addChild(btnInstructions);
             //add game container to stage
             stage.addChild(game);
+        };
+        Menu.prototype.btnStart_Click = function () {
+            // set the current state
+            game.removeAllChildren();
+            currentState = config.PLAY_STATE;
+            // calling main game function
+            changeState();
+        };
+        Menu.prototype.btnInstructions_Click = function () {
+            // set the current state
+            game.removeAllChildren();
+            currentState = config.INSTRUCTION_STATE;
+            // calling main game function
+            changeState();
         };
         return Menu;
     })();
     states.Menu = Menu;
 })(states || (states = {}));
-var instr;
-var start;
-function btnStart_Click() {
-    start.alpha = 0.7;
-    gameState = "play";
-    NewGameState();
-}
-function btnInstru_Click() {
-    instr.alpha = 0.7;
-    gameState = "instructions";
-    NewGameState();
-}
 //# sourceMappingURL=menu.js.map

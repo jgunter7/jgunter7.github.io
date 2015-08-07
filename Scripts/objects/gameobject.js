@@ -6,7 +6,7 @@ var __extends = this.__extends || function (d, b) {
 };
 var objects;
 (function (objects) {
-    // GameObject Super Class ++++++++++++++++++++++++++++++++++++++
+    // Cloud Class ++++++++++++++++++++++++++++++++++++++
     var GameObject = (function (_super) {
         __extends(GameObject, _super);
         // CONSTRUCTOR ++++++++++++++++++++++++++++++++++
@@ -20,6 +20,20 @@ var objects;
             this.regX = this.width * 0.5;
             this.regY = this.height * 0.5;
         }
+        // PUBLIC METHODS ++++++++++++++++++++++++++++++++++++++++++++++
+        // Calculate the game object's new x and y coordinates
+        GameObject.prototype.calcVector = function () {
+            var radians = this.direction * (Math.PI / 180);
+            this.dx = this.speed * Math.cos(radians);
+            this.dy = this.speed * Math.sin(radians);
+            //this.dy *= -1;
+        };
+        // Calculate the game object's new position
+        GameObject.prototype.calcPosition = function () {
+            this.x -= this.dx;
+            this.y -= this.dy;
+            this.rotation = this.direction;
+        };
         return GameObject;
     })(createjs.Sprite);
     objects.GameObject = GameObject;

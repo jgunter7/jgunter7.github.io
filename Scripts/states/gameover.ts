@@ -1,6 +1,7 @@
 ﻿module states {
-    // Game over state after playing the game
     export class GameOver {
+        // PUBLIC PROPERTIES
+
         //CONSTRUCTOR
         constructor() {
             this.main();
@@ -10,7 +11,7 @@
         // PUBLIC METHODS
         // update method
         public update() {
-            city.update();
+
         }
 
         // main method
@@ -18,52 +19,55 @@
             // instantiate new game container
             game = new createjs.Container();
 
-            //add city/road paralox to the game container
-            city = new objects.City(assets.loader.getResult("city"));
-            game.addChild(city);
+            //game title image
+            var title = new createjs.Bitmap(assets.loader.getResult("logo"));
+            title.x = canvas.clientWidth / 2 - (title.getBounds().width / 2);
+            title.y = 100;
+            game.addChild(title);
 
-            road = new objects.Road(assets.loader.getResult("road"));
-            game.addChild(road);
+            // add Mail Pilot Label
+            var label: objects.Label = new objects.Label("GAME OVER", config.FONT_EXTRA_LARGE,config.FONT_FAMILY, config.BLUE, canvas.clientWidth / 2, 300);
+            game.addChild(label);
 
-            // Add start and instruction buttons
-            starte = new createjs.Bitmap(assets.loader.getResult("start"));
-            starte.x = 75;
-            starte.y = 355;
-            starte.on("click", btnStartE_Click);
-            game.addChild(starte);
+            var scoreLabel: objects.Label = new objects.Label("SCORE: " + score, config.FONT_MEDIUM, config.FONT_FAMILY, config.BLUE, canvas.clientWidth / 2, 500);
+            game.addChild(scoreLabel);
 
-            quit = new createjs.Bitmap(assets.loader.getResult("quit"));
-            quit.x = 350;
-            quit.y = 355;
-            quit.on("click", btnQuit_Click);
-            game.addChild(quit); 
+            // start button
+            btnStart = new objects.Button("start");
+            btnStart.x = 540;
+            btnStart.y = 600;
+            btnStart.on("click", this.btnStart_Click);
+            game.addChild(btnStart);
 
-            //display final score
-            var instrus: createjs.Text;
-            instrus = new createjs.Text("Final Score: " + scoreboard.score, "26px Consolas", "#FFFF00");
-            instrus.x = canvas.clientWidth / 2 - instrus.getBounds().width / 2;
-            instrus.y = 50;
-            game.addChild(instrus);
+            // instruction button
+            btnQuitGO = new objects.Button("quit");
+            btnQuitGO.x = 740;
+            btnQuitGO.y = 600;
+            btnQuitGO.on("click", this.btnQuitGO_Click);
+            game.addChild(btnQuitGO);
 
             //add game container to stage
             stage.addChild(game);
         }
+
+        // reset play state and play again.
+        private btnStart_Click() {
+            // set the current state
+            game.removeAllChildren();
+            currentState = config.PLAY_STATE;
+
+            // calling main game function
+            changeState();
+        }
+
+        // quit to main menu;
+        private btnQuitGO_Click() {
+            // set the current state
+            game.removeAllChildren();
+            currentState = config.MENU_STATE;
+
+            // calling main game function
+            changeState();
+        }
     }
-}  
-
-var starte: createjs.Bitmap;
-var quit: createjs.Bitmap;
-
-// Change gamestate to play when start is clicked
-function btnStartE_Click() {
-    starte.alpha = 0.7;
-    gameState = "play";
-    NewGameState();
-}
-
-// Change gamestate to menu when quit is clicked
-function btnQuit_Click() {
-    quit.alpha = 0.7;
-    gameState = "menu";
-    NewGameState();
-}
+}   

@@ -1,17 +1,13 @@
 var objects;
 (function (objects) {
-    //Display the score on the game play state
     var ScoreBoard = (function () {
         // CONSTRUCTOR +++++++++++++++++++
         function ScoreBoard() {
             // PUBLIC PROPERTIES
             this.score = 0;
             this.lives = 5;
-            this.livesLabel = new createjs.Text("Lives:", "40px Consolas", "#FFFF00");
-            this.scoreLabel = new createjs.Text("Score:", "40px Consolas", "#FFFF00");
-            this.scoreLabel.x = 350;
-            game.addChild(this.livesLabel);
-            game.addChild(this.scoreLabel);
+            this.temp = new objects.Label("bob", config.FONT_MEDIUM, config.FONT_FAMILY, config.YELLOW, 0, 0);
+            //game.addChild(this.scoreLabel);
         }
         // PUBLIC METHODS +++++++++++++++++
         ScoreBoard.prototype.update = function () {

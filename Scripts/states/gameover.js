@@ -1,7 +1,7 @@
 var states;
 (function (states) {
-    // Game over state after playing the game
     var GameOver = (function () {
+        // PUBLIC PROPERTIES
         //CONSTRUCTOR
         function GameOver() {
             this.main();
@@ -9,53 +9,54 @@ var states;
         // PUBLIC METHODS
         // update method
         GameOver.prototype.update = function () {
-            city.update();
         };
         // main method
         GameOver.prototype.main = function () {
             // instantiate new game container
             game = new createjs.Container();
-            //add city/road paralox to the game container
-            city = new objects.City(assets.loader.getResult("city"));
-            game.addChild(city);
-            road = new objects.Road(assets.loader.getResult("road"));
-            game.addChild(road);
-            // Add start and instruction buttons
-            starte = new createjs.Bitmap(assets.loader.getResult("start"));
-            starte.x = 75;
-            starte.y = 355;
-            starte.on("click", btnStartE_Click);
-            game.addChild(starte);
-            quit = new createjs.Bitmap(assets.loader.getResult("quit"));
-            quit.x = 350;
-            quit.y = 355;
-            quit.on("click", btnQuit_Click);
-            game.addChild(quit);
-            //display final score
-            var instrus;
-            instrus = new createjs.Text("Final Score: " + scoreboard.score, "26px Consolas", "#FFFF00");
-            instrus.x = canvas.clientWidth / 2 - instrus.getBounds().width / 2;
-            instrus.y = 50;
-            game.addChild(instrus);
+            //game title image
+            var title = new createjs.Bitmap(assets.loader.getResult("logo"));
+            title.x = canvas.clientWidth / 2 - (title.getBounds().width / 2);
+            title.y = 100;
+            game.addChild(title);
+            // add Mail Pilot Label
+            var label = new objects.Label("GAME OVER", config.FONT_EXTRA_LARGE, config.FONT_FAMILY, config.BLUE, canvas.clientWidth / 2, 300);
+            game.addChild(label);
+            var scoreLabel = new objects.Label("SCORE: " + score, config.FONT_MEDIUM, config.FONT_FAMILY, config.BLUE, canvas.clientWidth / 2, 500);
+            game.addChild(scoreLabel);
+            // start button
+            btnStart = new objects.Button("start");
+            btnStart.x = 540;
+            btnStart.y = 600;
+            btnStart.on("click", this.btnStart_Click);
+            game.addChild(btnStart);
+            // instruction button
+            btnQuitGO = new objects.Button("quit");
+            btnQuitGO.x = 740;
+            btnQuitGO.y = 600;
+            btnQuitGO.on("click", this.btnQuitGO_Click);
+            game.addChild(btnQuitGO);
             //add game container to stage
             stage.addChild(game);
+        };
+        // reset play state and play again.
+        GameOver.prototype.btnStart_Click = function () {
+            // set the current state
+            game.removeAllChildren();
+            currentState = config.PLAY_STATE;
+            // calling main game function
+            changeState();
+        };
+        // quit to main menu;
+        GameOver.prototype.btnQuitGO_Click = function () {
+            // set the current state
+            game.removeAllChildren();
+            currentState = config.MENU_STATE;
+            // calling main game function
+            changeState();
         };
         return GameOver;
     })();
     states.GameOver = GameOver;
 })(states || (states = {}));
-var starte;
-var quit;
-// Change gamestate to play when start is clicked
-function btnStartE_Click() {
-    starte.alpha = 0.7;
-    gameState = "play";
-    NewGameState();
-}
-// Change gamestate to menu when quit is clicked
-function btnQuit_Click() {
-    quit.alpha = 0.7;
-    gameState = "menu";
-    NewGameState();
-}
 //# sourceMappingURL=gameover.js.map
